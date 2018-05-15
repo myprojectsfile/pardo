@@ -1,0 +1,46 @@
+<br>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">image</span>
+      </div>
+      <input style="direction: ltr;" type="text" class="form-control" name="image" [(ngModel)]="image" placeholder="docker image name"
+        aria-label="ImageName" aria-describedby="basic-addon1">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">tag</span>
+      </div>
+      <input style="direction: ltr;" type="text" class="form-control" name="tag" [(ngModel)]="tag" placeholder="docker image tag"
+        aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <button type="button" class="btn btn-success btn-sm" (click)="downlodDockerImage()">افزودن به لیست دانلود</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3 text-right">
+    <p>{{message}}</p>
+  </div>
+  <div class="col-sm-1 text-right">
+    <img *ngIf="loading" src="assets/loading.gif" alt="loading">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10">
+    <ul>
+      <div class="row">
+        <div class="col-sm-10">
+          <li *ngFor="let queueItem of downloadQueue">
+            {{ queueItem.jobId }} ---> {{ queueItem.imageName }} ---> {{ queueItem.state }}
+          </li>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
