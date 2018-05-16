@@ -5,7 +5,14 @@ const uuidv1 = require('uuid/v1');
 global.Promise = Promise;
 
 function downloadImage(image, tag, id) {
-    var dir = image + '_' + tag;
+
+    // check if image name includes '/' character
+    if (String(image).includes('/')) {
+        var dir = String(image).replace('/', '_') + '_' + tag;
+    } else {
+        var dir = image + '_' + tag;
+    }
+
 
     var download_command = './image-downloader.sh ' + dir + ' ' + image + ':' + tag;
     var compress_command = 'tar -C ./' + dir + ' -cvf ' + dir + '.tar ./';
