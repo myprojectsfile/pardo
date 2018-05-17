@@ -25,26 +25,31 @@ function downloadImage(image, tag, id) {
             .stderr.on('data', (error) => {
                 reject(error);
             }).on('close', (code) => {
+                console.log('download complete successfully');
                 if (code == 0) {
                     compressImageLayers()
                         .stderr.on('data', (error) => {
                             reject(error);
                         }).on('close', (code) => {
+                            console.log('compressing complete successfully');
                             if (code == 0) {
                                 uploadImage()
                                     .stderr.on('data', (error) => {
                                         reject(error);
                                     }).on('close', (code) => {
                                         if (code == 0) {
+                                            console.log('uploading complete successfully');
                                             deleteTempDir()
                                                 .stderr.on('data', (error) => {
                                                     reject(error);
                                                 }).on('close', (code) => {
                                                     if (code == 0) {
+                                                        console.log('deleting temp dir complete successfully');
                                                         deleteTempFile()
                                                             .stderr.on('data', (error) => {
                                                                 reject(error);
                                                             }).on('close', (code) => {
+                                                                console.log('deleting temp file complete successfully');
                                                                 if (code == 0) resolve(id);
                                                                 else reject(code);
                                                             });
