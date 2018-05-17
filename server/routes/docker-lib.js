@@ -21,6 +21,7 @@ function downloadImage(image, tag, id) {
     var delete_file_command = 'rm ' + dir + '.tar';
 
     return new Promise(function (resolve, reject) {
+        console.log('starting download ...');
         downloadImageLayer()
             .stderr.on('data', (error) => {
                 reject(error);
