@@ -78,44 +78,129 @@ function downloadImage(image, tag, id) {
 }
 
 function downloadImageLayer(download_command) {
-    return exec(download_command)
-        .then(() => {console.log('(1) -----> downloading completed successfully')})
-        .catch((error) => {
-            console.log(`(1) ######## downloading error ----> :${error}`);
+    return new Promise((resolve, reject) => {
+        const spa = spawn(download_command);
+
+        spa.stdout.on('data', (data) => {
         });
+
+        spa.stderr.on('data', (error) => {
+            reject(error);
+        });
+
+        spa.on('close', (code) => {
+            if (code == 0) resolve(code);
+            else reject(code);
+        });
+    })
 }
 
 function compressImageLayers(compress_command) {
-    return exec(compress_command)
-        .then(() => { console.log('(2) -----> compressing dir completed successfully') })
-        .catch((error) => {
-            console.log(`(2) ######## compressing error ---->:${error}`);
+    return new Promise((resolve, reject) => {
+        const spa = spawn(compress_command);
+
+        spa.stdout.on('data', (data) => {
         });
+
+        spa.stderr.on('data', (error) => {
+            reject(error);
+        });
+
+        spa.on('close', (code) => {
+            if (code == 0) resolve(code);
+            else reject(code);
+        });
+    })
 }
 
 function uploadImage(upload_command) {
-    return exec(upload_command)
-        .then(() => { console.log('(3) -----> uploading file completed successfully') })
-        .catch((error) => {
-            console.log(`(3) ######## uploading error ---->:${error}`);
+    return new Promise((resolve, reject) => {
+        const spa = spawn(upload_command);
+
+        spa.stdout.on('data', (data) => {
         });
+
+        spa.stderr.on('data', (error) => {
+            reject(error);
+        });
+
+        spa.on('close', (code) => {
+            if (code == 0) resolve(code);
+            else reject(code);
+        });
+    })
 }
 
 function deleteTempDir(delete_dir_command) {
-    return exec(delete_dir_command)
-        .then(() => { console.log('(4) -----> deleting dir completed successfully') })
-        .catch((error) => {
-            console.log(`(4) ######## deleting dir error ---->:${error}`);
+    return new Promise((resolve, reject) => {
+        const spa = spawn(delete_dir_command);
+
+        spa.stdout.on('data', (data) => {
         });
+
+        spa.stderr.on('data', (error) => {
+            reject(error);
+        });
+
+        spa.on('close', (code) => {
+            if (code == 0) resolve(code);
+            else reject(code);
+        });
+    })
 }
 
 function deleteTempFile(delete_file_command) {
-    return exec(delete_file_command)
-        .then(() => { console.log('(5) -----> deleting file completed successfully') })
-        .catch((error) => {
-            console.log(`(5) ######## deleting file error ---->:${error}`);
+    return new Promise((resolve, reject) => {
+        const spa = spawn(delete_file_command);
+
+        spa.stdout.on('data', (data) => {
         });
+
+        spa.stderr.on('data', (error) => {
+            reject(error);
+        });
+
+        spa.on('close', (code) => {
+            if (code == 0) resolve(code);
+            else reject(code);
+        });
+    })
 }
+
+
+
+
+// function compressImageLayers(compress_command) {
+//     return exec(compress_command)
+//         .then(() => { console.log('(2) -----> compressing dir completed successfully') })
+//         .catch((error) => {
+//             console.log(`(2) ######## compressing error ---->:${error}`);
+//         });
+// }
+
+// function uploadImage(upload_command) {
+//     return exec(upload_command)
+//         .then(() => { console.log('(3) -----> uploading file completed successfully') })
+//         .catch((error) => {
+//             console.log(`(3) ######## uploading error ---->:${error}`);
+//         });
+// }
+
+// function deleteTempDir(delete_dir_command) {
+//     return exec(delete_dir_command)
+//         .then(() => { console.log('(4) -----> deleting dir completed successfully') })
+//         .catch((error) => {
+//             console.log(`(4) ######## deleting dir error ---->:${error}`);
+//         });
+// }
+
+// function deleteTempFile(delete_file_command) {
+//     return exec(delete_file_command)
+//         .then(() => { console.log('(5) -----> deleting file completed successfully') })
+//         .catch((error) => {
+//             console.log(`(5) ######## deleting file error ---->:${error}`);
+//         });
+// }
 
 module.exports = {
     downloadImage: downloadImage
